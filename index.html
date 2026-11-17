@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Курение и здоровье студентов-медиков: анонимный опрос</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120d1f;--tx:#f6efe6;--mut:#b8a9c9;--am:#ffb547;--ro:#ff6f91;--vi:#7c5cff;--ln:rgba(255,255,255,.14)}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;font-family:Manrope,system-ui,sans-serif;color:var(--tx);background:var(--bg);padding:26px 14px 70px;display:flex;justify-content:center;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 18s ease-in-out infinite alternate}
+body:before{width:520px;height:520px;background:radial-gradient(var(--vi),transparent 70%);top:-160px;right:-140px}
+body:after{width:560px;height:560px;background:radial-gradient(var(--ro),transparent 70%);bottom:-200px;left:-160px;animation-delay:-9s;opacity:.35}
+@keyframes drift{to{transform:translate(-90px,70px) scale(1.15)}}
+main{width:min(660px,100%)}
+.badge{display:inline-block;font-size:13px;font-weight:700;color:var(--am);border:1px solid #ffb54755;background:#ffb5471a;padding:6px 14px;border-radius:99px}
+header{position:relative;margin-bottom:22px}
+h1{font:700 clamp(26px,6vw,38px)/1.15 'Playfair Display',Georgia,serif;margin:16px 0 12px;background:linear-gradient(95deg,var(--am),var(--ro) 60%,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);line-height:1.55;max-width:520px}
+.wisp{position:absolute;right:4px;top:-6px;width:80px;height:74px;opacity:.7}
+.wisp path{fill:none;stroke:var(--mut);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:60;animation:rise 4.5s ease-in-out infinite}
+.wisp path:nth-child(2){animation-delay:1.4s}.wisp path:nth-child(3){animation-delay:2.8s}
+@keyframes rise{0%{stroke-dashoffset:60;opacity:0;transform:translateY(10px)}35%{opacity:1}100%{stroke-dashoffset:-60;opacity:0;transform:translateY(-12px)}}
+.card{background:rgba(255,255,255,.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--ln);border-radius:26px;padding:26px;box-shadow:0 30px 70px -30px #000a;animation:up .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.steps{display:flex;gap:7px;margin-bottom:12px}
+.seg{flex:1;height:6px;border-radius:9px;background:#ffffff1f;overflow:hidden}
+.seg i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--am),var(--ro));transition:width .6s cubic-bezier(.3,.7,.2,1)}
+.seg.f i{width:100%}.seg.c i{width:45%;animation:glow 1.6s ease-in-out infinite alternate}
+@keyframes glow{to{box-shadow:0 0 12px var(--am)}}
+.st{font-size:14px;color:var(--mut);margin-bottom:22px}
+.q{margin-bottom:24px;animation:in .5s both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.q label{display:block;font-weight:700;line-height:1.4;margin-bottom:6px}
+.opt{font-style:normal;font-weight:500;font-size:12px;color:var(--mut);border:1px solid var(--ln);border-radius:99px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+.hint{display:block;color:var(--mut);font-size:13px;line-height:1.4;margin-bottom:10px}
+.ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:9px;margin-top:10px}
+.ch button{position:relative;font:500 15px/1.3 Manrope,sans-serif;text-align:left;color:var(--tx);padding:13px 38px 13px 15px;border:1.5px solid var(--ln);background:#ffffff0d;border-radius:14px;cursor:pointer;transition:.2s}
+.ch button:hover{border-color:var(--am);transform:translateY(-2px)}
+.ch button:after{content:"";position:absolute;right:13px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;border:1.5px solid var(--ln);transition:.2s}
+.ch button.on{background:linear-gradient(#1d1530,#1d1530) padding-box,linear-gradient(120deg,var(--am),var(--ro)) border-box;border:1.5px solid transparent;box-shadow:0 8px 24px -10px var(--ro)}
+.ch button.on:after{background:linear-gradient(120deg,var(--am),var(--ro));border-color:transparent;animation:pop .35s}
+.ch button.on:before{content:"";position:absolute;right:20px;top:50%;width:4px;height:8px;margin-top:-6px;border:solid #1d1530;border-width:0 2px 2px 0;transform:rotate(45deg);z-index:1}
+@keyframes pop{50%{transform:scale(1.35)}}
+input[type=text]{font:500 16px Manrope,sans-serif;width:100%;padding:14px 16px;margin-top:6px;color:var(--tx);background:#ffffff0d;border:1.5px solid var(--ln);border-radius:14px;transition:.2s}
+input::placeholder{color:#b8a9c988}
+input:focus{outline:none;border-color:var(--am);box-shadow:0 0 0 4px #ffb54726}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:6px}
+.btn{font:700 16px Manrope,sans-serif;padding:14px 28px;border:0;border-radius:14px;cursor:pointer;color:#1a1024;background:linear-gradient(120deg,var(--am),var(--ro));box-shadow:0 12px 28px -12px var(--ro);transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.07)}.btn:disabled{opacity:.5;transform:none}
+.btn.g{background:none;box-shadow:none;color:var(--mut);padding-left:0}
+.err{color:#ffb4c2;font-size:14px;min-height:20px;margin-top:10px}
+.shake{animation:sh .38s}@keyframes sh{30%{transform:translateX(-7px)}60%{transform:translateX(7px)}}
+.done{text-align:center;padding:18px 0 6px;animation:in .6s both}
+.burst{position:relative;width:120px;height:120px;margin:0 auto 14px}
+.burst svg{position:absolute;inset:0;width:100%;height:100%}
+.burst circle{fill:none;stroke:url(#g);stroke-width:4;stroke-dasharray:300;animation:dr 1s ease-out both}
+.burst path{fill:none;stroke:var(--am);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;animation:dr2 .6s .8s ease-out both}
+@keyframes dr{from{stroke-dashoffset:300}to{stroke-dashoffset:0}}
+@keyframes dr2{from{stroke-dashoffset:50}to{stroke-dashoffset:0}}
+.burst span{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;animation:fly 1.1s ease-out both}
+@keyframes fly{from{transform:translate(-50%,-50%) scale(0)}50%{opacity:1}to{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1);opacity:0}}
+.done h2{font:700 28px 'Playfair Display',serif;margin-bottom:8px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<svg class="wisp" viewBox="0 0 80 74" aria-hidden="true"><path d="M20 70c-10-14 10-18 0-32s10-18 0-30"/><path d="M40 70c-10-14 10-18 0-32s10-18 0-30"/><path d="M60 70c-10-14 10-18 0-32s10-18 0-30"/></svg>
+<span class="badge">Анонимный опрос · 30 вопросов · около 5 минут</span>
+<h1>Курение и здоровье студентов-медиков</h1>
+<p class="sub">ФИО и контакты не собираются. Ответы используются только в учебном исследовании по медицинской статистике.</p>
+</header>
+<div class="card" id="box">
+<div class="steps" id="steps"></div>
+<div class="st" id="st"></div>
+<div id="qs"></div>
+<div class="err" id="err"></div>
+<div class="nav"><button class="btn g" id="prev">Назад</button><button class="btn" id="next">Далее</button></div>
+</div>
+</main>
+<script>
+// Впишите 30 кодов entry (см. инструкцию) вместо entry:[]
+const CFG={form:'https://docs.google.com/forms/d/e/1FAIpQLSeGTS6ln1H1rXvDLJITusc7xisETqzKYZEuAbH5HUpwl_jUcA/formResponse',entry:["entry.1656336651","entry.1839333192","entry.1888971297","entry.1465371412","entry.608526527","entry.627832491","entry.1145052149","entry.695845218","entry.1388294595","entry.849402569","entry.1504747917","entry.899513830","entry.1742009657","entry.1209128787","entry.544666935","entry.1892959","entry.1604658395","entry.2096309267","entry.1574843714","entry.1714792236","entry.1517811673","entry.1700076371","entry.472690447","entry.875507716","entry.1154981501","entry.1849418724","entry.1685481375","entry.975896282","entry.608227971","entry.551804826"]};
+
+const YES='Да, курю',NS='Не курю',NEVER='Никогда не пробовал(а) сигареты',YN=['Да','Нет'],YNN=['Да','Нет',NS];
+const QS=[
+{t:'Подтверждаете ли вы добровольное согласие на участие в учебном исследовании без сбора ФИО и контактов?',m:['Я добровольно соглашаюсь принять участие'],h:'Если вы не согласны участвовать, просто закройте страницу.'},
+{t:'Сколько вам полных лет?',n:[16,60],h:'Целое число лет.'},
+{t:'Укажите ваш пол',o:['Мужской','Женский']},
+{t:'На каком факультете вы обучаетесь?',o:['Лечебный','Педиатрический','Стоматологический','Фармацевтический']},
+{t:'На каком курсе вы учитесь?',o:['1 курс','2 курс','3 курс','4 курс','5 курс','6 курс']},
+{t:'Ваш вес, кг',n:[30,250],opt:1,h:'Можно пропустить. Целое число, например: 62.'},
+{t:'Ваш рост, см',n:[130,220],opt:1,h:'Можно пропустить. Целое число, например: 170.'},
+{t:'Курите ли вы табачные сигареты в настоящее время?',o:[YES,'Курил(а), но бросил(а)','Никогда не курил(а)'],h:'Курящим считается человек, куривший хотя бы раз за последние 30 дней.'},
+{t:'В каком возрасте вы впервые выкурили сигарету?',o:['До 18 лет','18–20 лет','Старше 20 лет',NEVER]},
+{t:'Сколько сигарет в день вы выкуриваете в среднем?',o:['1–10 сигарет','11–20 сигарет','Более 20 сигарет',NS],h:'Если не курите, выберите «Не курю».'},
+{t:'Сколько лет вы курите (курили)?',n:[0,50],h:'Стаж курения в годах, целым числом. Если не курили, укажите 0.'},
+{t:'Какую никотиносодержащую продукцию вы используете чаще всего?',o:['Сигареты','Электронные сигареты, вейп','Кальян','Системы нагревания табака','Не использую']},
+{t:'Выкуриваете ли вы первую сигарету в течение 30 минут после пробуждения?',o:YNN},
+{t:'Курят ли члены вашей семьи?',o:YN},
+{t:'Курят ли ваши друзья и одногруппники?',o:['Большинство','Некоторые','Никто']},
+{t:'Пытались ли вы бросить курить?',o:YNN},
+{t:'Хотите ли вы бросить курить?',o:['Да','Нет','Затрудняюсь ответить',NS]},
+{t:'Что, по вашему мнению, больше всего повлияло на начало курения?',o:['Любопытство','Влияние друзей','Стресс и учебная нагрузка','Пример семьи','Мода, реклама','Другое','Не курю']},
+{t:'Как часто вы употребляете алкоголь?',o:['Никогда','Редко (до 3 раз в месяц)','Часто (раз в неделю и чаще)']},
+{t:'Пьёте ли вы энергетические напитки регулярно (раз в неделю и чаще)?',o:YN},
+{t:'Какие другие вредные привычки есть у вас, кроме курения?',m:['Злоупотребление кофе','Недостаток сна','Малоподвижный образ жизни','Нерегулярное питание','Других вредных привычек нет'],opt:1,ex:['Других вредных привычек нет'],h:'Можно выбрать несколько вариантов.'},
+{t:'Есть ли у вас хроническое заболевание?',o:YN},
+{t:'Какие системы органов затронуты хроническим заболеванием?',m:['Дыхательная','Сердечно-сосудистая','Пищеварительная','Нервная','Другая','Хронических заболеваний нет'],opt:1,ex:['Хронических заболеваний нет'],h:'Можно выбрать несколько вариантов.'},
+{t:'Бывает ли у вас утренний кашель?',o:YN},
+{t:'Появляется ли у вас одышка при подъёме на 2–3 этажа?',o:YN},
+{t:'Как часто вы занимаетесь физической активностью?',o:['Не занимаюсь','1–2 раза в неделю','3 раза в неделю и чаще']},
+{t:'Сколько часов вы обычно спите?',o:['Менее 6 часов','6–8 часов','Более 8 часов']},
+{t:'Как вы оцениваете свой уровень стресса во время учёбы?',o:['Низкий','Средний','Высокий']},
+{t:'Как вы относитесь к полному запрету курения на территории вуза?',o:['Положительно','Нейтрально','Отрицательно']},
+{t:'Получали ли вы в вузе информацию о профилактике курения?',o:['Да','Нет','Не помню']}
+];
+const SEC=[['Согласие и общие сведения',0,7],['Курение табачных сигарет',7,13],['Окружение и мотивация',13,18],['Привычки и здоровье',18,24],['Образ жизни и отношение',24,30]];
+const $=s=>document.querySelector(s),a={};let st=0;
+
+function draw(){
+ const [title,s,e]=SEC[st],box=$('#qs');
+ $('#steps').innerHTML=SEC.map((_,i)=>`<div class="seg ${i<st?'f':i==st?'c':''}"><i></i></div>`).join('');
+ $('#st').textContent=`Шаг ${st+1} из ${SEC.length} · ${title}`;
+ box.innerHTML='';
+ for(let i=s;i<e;i++){
+  const q=QS[i],d=document.createElement('div');
+  d.className='q';d.style.animationDelay=(i-s)*70+'ms';d.dataset.i=i;
+  d.innerHTML=`<label>${i+1}. ${q.t}${q.opt?'<em class="opt">необязательно</em>':''}</label>${q.h?`<span class="hint">${q.h}</span>`:''}`;
+  if(q.o||q.m){
+   const c=document.createElement('div');c.className='ch';
+   const paint=()=>c.querySelectorAll('button').forEach(x=>x.classList.toggle('on',q.m?(a[i]||[]).includes(x.textContent):a[i]===x.textContent));
+   (q.o||q.m).forEach(v=>{
+    const b=document.createElement('button');b.type='button';b.textContent=v;
+    b.onclick=()=>{
+     if(q.m){let l=a[i]||[];
+      if(l.includes(v))l=l.filter(x=>x!=v);else l=(q.ex||[]).includes(v)?[v]:[...l.filter(x=>!(q.ex||[]).includes(x)),v];
+      a[i]=l}else a[i]=v;
+     paint()};
+    c.append(b)});
+   d.append(c);paint();
+  }else{
+   const n=document.createElement('input');n.type='text';n.inputMode='numeric';n.placeholder=`от ${q.n[0]} до ${q.n[1]}`;
+   n.value=a[i]??'';n.oninput=()=>{a[i]=n.value.trim()};d.append(n);
+  }
+  box.append(d);
+ }
+ $('#prev').style.visibility=st?'visible':'hidden';
+ $('#next').textContent=st==SEC.length-1?'Отправить ответы':'Далее';
+}
+function chk(i){
+ const q=QS[i],v=a[i];
+ if(q.m)return(!q.opt&&!(v&&v.length))?'Выберите ответ':'';
+ if(q.n){
+  if(v===undefined||v==='')return q.opt?'':'Введите число';
+  if(!/^\d+$/.test(v)||+v<q.n[0]||+v>q.n[1])return `Введите целое число от ${q.n[0]} до ${q.n[1]}`;
+  if(i==10&&a[7]===YES&&+v<1)return 'Вы отметили, что курите: стаж должен быть не меньше 1 года';
+  return '';
+ }
+ if(!v)return 'Выберите ответ';
+ if(a[7]===YES){
+  if(i==8&&v===NEVER)return 'Вы отметили, что курите: выберите возраст первой сигареты';
+  if(i==9&&v===NS)return 'Вы отметили, что курите: выберите количество сигарет в день';
+ }
+ return '';
+}
+$('#prev').onclick=()=>{st--;draw();$('#err').textContent=''};
+$('#next').onclick=()=>{
+ const [,s,e]=SEC[st];
+ for(let i=s;i<e;i++){
+  const m=chk(i);if(!m)continue;
+  $('#err').textContent=`Вопрос ${i+1}: ${m}`;
+  const el=$(`.q[data-i="${i}"]`);el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');el.scrollIntoView({block:'center',behavior:'smooth'});
+  return;
+ }
+ $('#err').textContent='';
+ if(st<SEC.length-1){st++;draw();scrollTo({top:0,behavior:'smooth'});}else send();
+};
+function burst(){
+ const colors=['#ffb547','#ff6f91','#7c5cff','#5eead4'];let h='';
+ for(let k=0;k<18;k++){const g=k/18*6.283,d=62+Math.random()*34;
+  h+=`<span style="--x:${Math.cos(g)*d}px;--y:${Math.sin(g)*d}px;background:${colors[k%4]};animation-delay:${.7+Math.random()*.2}s"></span>`}
+ return h;
+}
+async function send(){
+ if(CFG.entry.length!=QS.length){$('#err').textContent='Форма ещё не подключена: впишите 30 кодов entry в файл index.html.';return}
+ const fd=new FormData();
+ QS.forEach((q,i)=>{const v=a[i];
+  if(q.m)(v||[]).forEach(x=>fd.append(CFG.entry[i],x));
+  else if(v!==undefined&&v!=='')fd.append(CFG.entry[i],v)});
+ $('#next').disabled=true;
+ try{
+  await fetch(CFG.form,{method:'POST',mode:'no-cors',body:fd});
+  $('#box').innerHTML=`<div class="done"><div class="burst"><svg viewBox="0 0 120 120"><defs><linearGradient id="g"><stop offset="0" stop-color="#ffb547"/><stop offset="1" stop-color="#ff6f91"/></linearGradient></defs><circle cx="60" cy="60" r="44"/><path d="M42 62l13 13 24-28"/></svg>${burst()}</div><h2>Спасибо за участие!</h2><p class="sub" style="margin:0 auto">Ваш ответ записан. Страницу можно закрыть.</p></div>`;
+ }catch(e){$('#err').textContent='Не удалось отправить. Проверьте интернет и нажмите ещё раз.';$('#next').disabled=false}
+}
+draw();
+</script>
+</body>
+</html>
